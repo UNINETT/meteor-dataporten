@@ -4,12 +4,14 @@ OAuth.registerService('dataporten', 2, null, function(query) {
 
   var accessToken = getAccessToken(query);
   var identity = getIdentity(accessToken);
+  var groups = getGroups(accessToken);
 
   return {
     serviceData: {
       id: identity.user.userid,
       accessToken: OAuth.sealSecret(accessToken),
-      emails: [{address:identity.user.email, verified:false}]
+      emails: [{address:identity.user.email, verified:false}],
+      groups: groups
     },
     options: {
       profile: {name: identity.user.userid, fullname: identity.user.name}, 
@@ -70,6 +72,22 @@ var getIdentity = function (accessToken) {
       "https://auth.dataporten.no/userinfo", {
         headers: {"User-Agent": userAgent}, // http://developer.dataporten.com/v3/#user-agent-required
         params: {access_token: accessToken}
+      }).data;
+  } catch (err) {
+    throw _.extend(new Error("Failed to fetch identity from Dataporten. " + err.message),
+                   {response: err.response});
+  }
+};
+
+
+var getGroups = function (accessToken) {
+  try {
+    return HTTP.get(
+      "https://groups-api.dataporten.no/groups/me/groups", {
+        headers: {"User-Agent": userAgent,
+        "Authorization": "Bearer " + accessToken}, // http://developer.dataporten.com/v3/#user-agent-required
+        params: {access_token: accessToken,
+        "Authorization": "Bearer " + accessToken}
       }).data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Dataporten. " + err.message),
