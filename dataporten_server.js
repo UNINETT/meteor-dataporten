@@ -34,7 +34,7 @@ var getAccessToken = function (query) {
     throw new ServiceConfiguration.ConfigError();
 
   var response;
-  var clientId = process.env.DATAPORTEN_CLIENTID || config.clientId;
+  var clientId = config.clientId;
   //var clientSecret = process.env.DATAPORTEN_CLIENTSECRET || config.clientSecret;
   try {
     response = HTTP.post(
@@ -47,8 +47,9 @@ var getAccessToken = function (query) {
           grant_type: 'authorization_code',
           code: query.code,
           client_id: clientId,
-          //client_secret: OAuth.openSecret(config.secret),
-          redirect_uri: OAuth._redirectUri('dataporten', config),
+          client_secret: OAuth.openSecret(config.secret),
+          //redirect_uri: OAuth._redirectUri('dataporten', config),
+          redirect_uri: config.redirect_url,
           state: query.state
         }
       });

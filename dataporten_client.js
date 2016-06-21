@@ -19,7 +19,7 @@ Dataporten.requestCredential = function (options, credentialRequestCompleteCallb
     return;
   }
   var credentialToken = Random.secret();
-  var clientId = process.env.DATAPORTEN_CLIENTID || config.clientId;
+  var clientId = config.clientId;
 
   var loginStyle = OAuth._loginStyle('dataporten', config, options);
 
@@ -27,7 +27,8 @@ Dataporten.requestCredential = function (options, credentialRequestCompleteCallb
     'https://auth.dataporten.no/oauth/authorization' +
     '?client_id=' + clientId +
     '&response_type=code' +
-    '&redirect_uri=' + OAuth._redirectUri('dataporten', config) +
+    //'&redirect_uri=' + OAuth._redirectUri('dataporten', config) +
+    '&redirect_uri=' + config.redirect_url +
     '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl);
 
   OAuth.launchLogin({
