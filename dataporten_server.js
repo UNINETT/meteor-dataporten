@@ -10,7 +10,7 @@ OAuth.registerService('dataporten', 2, null, function(query) {
     serviceData: {
       id: identity.user.userid,
       accessToken: OAuth.sealSecret(accessToken),
-      email: identity:user.email,
+      email: identity.user.email,
       groups: groups
     },
     options: {

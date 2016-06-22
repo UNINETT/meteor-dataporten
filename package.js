@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Dataporten OAuth flow",
-  version: "0.1.0",
+  version: "0.1.1",
   git: 'https://github.com/kasperrt/meteor-dataporten.git',
   name: 'kasperrt:dataporten',
   documentation: null
