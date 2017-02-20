@@ -27,8 +27,8 @@ Dataporten.requestCredential = function (options, credentialRequestCompleteCallb
     'https://auth.dataporten.no/oauth/authorization' +
     '?client_id=' + clientId +
     '&response_type=code' +
-    //'&redirect_uri=' + OAuth._redirectUri('dataporten', config) +
-    '&redirect_uri=' + config.redirect_url +
+    '&redirect_uri=' + OAuth._redirectUri('dataporten', config) +
+    //'&redirect_uri=' + config.redirect_url +
     '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl);
 
   OAuth.launchLogin({

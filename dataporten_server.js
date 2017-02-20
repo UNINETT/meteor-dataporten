@@ -14,7 +14,7 @@ OAuth.registerService('dataporten', 2, null, function(query) {
       groups: groups
     },
     options: {
-      profile: {name: identity.user.userid, fullname: identity.user.name}, 
+      profile: {name: identity.user.userid, fullname: identity.user.name},
       username:identity.user.userid,
     },
   };
@@ -44,8 +44,8 @@ var getAccessToken = function (query) {
           code: query.code,
           client_id: clientId,
           client_secret: OAuth.openSecret(config.secret),
-          //redirect_uri: OAuth._redirectUri('dataporten', config),
-          redirect_uri: config.redirect_url,
+          redirect_uri: OAuth._redirectUri('dataporten', config),
+          //redirect_uri: config.redirect_url,
           state: query.state
         }
       });
