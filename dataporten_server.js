@@ -64,8 +64,7 @@ var getIdentity = function (accessToken) {
   try {
     return HTTP.get(
       "https://auth.dataporten.no/userinfo", {
-        headers: {"User-Agent": userAgent}, // http://developer.dataporten.com/v3/#user-agent-required
-        params: {access_token: accessToken}
+        headers: {"User-Agent": userAgent, "Authorization": "Bearer " + accessToken}
       }).data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Dataporten. " + err.message),
@@ -80,8 +79,7 @@ var getGroups = function (accessToken) {
       "https://groups-api.dataporten.no/groups/me/groups", {
         headers: {"User-Agent": userAgent,
         "Authorization": "Bearer " + accessToken}, // http://developer.dataporten.com/v3/#user-agent-required
-        params: {access_token: accessToken,
-        "Authorization": "Bearer " + accessToken}
+
       }).data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Dataporten. " + err.message),
