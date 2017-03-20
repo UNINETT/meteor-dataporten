@@ -11,7 +11,9 @@ OAuth.registerService('dataporten', 2, null, function(query) {
       id: identity.user.userid,
       accessToken: OAuth.sealSecret(accessToken),
       email: identity.user.email,
-      groups: groups
+      groups: groups,
+      userid_sec: identity.user.userid_sec[0],
+      profilepicture: identity.user.profilephoto
     },
     options: {
       profile: {name: identity.user.name, fullname: identity.user.name},
